@@ -17,4 +17,19 @@ SpideyDancer.prototype.step = function(){
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
+  if (window.dancers) {
+    var newestDancer = window.dancers[window.dancers.length - 1];
+    var topPos = newestDancer.top;
+    var leftPos = newestDancer.left;
+  
+    this.$node.animate({
+      left: leftPos,
+      top: topPos
+    }, this.timeBetweenSteps / 2, 'swing', function() {
+      this.$node.animate({
+        left: this.left,
+        top: this.top
+      }, this.timeBetweenSteps / 2);
+    }.bind(this));
+  }
 };
